@@ -1,11 +1,9 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import { Button } from "antd";
+'use client';
+
+import HomePage from "@/pages/home_page";
+
+
 
 export default function Home() {
-  return (
-<div className="App">
-    <Button type="primary">Button</Button>
-  </div>
-  );
+  return HomePage();
 }
