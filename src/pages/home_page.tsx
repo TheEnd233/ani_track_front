@@ -1,5 +1,5 @@
 import { getAniDataEndpoint } from "@/api";
-import CardCompoment from "@/compoments/bangumi_card";
+import CardListCompoment from "@/compoments/bangumi_card";
 import SearchBar from "@/compoments/search_bar";
 import API from "@/request";
 import { useEffect, useState } from "react";
@@ -62,7 +62,7 @@ export default function HomePage() {
         <SearchBar></SearchBar>
       </div>
 
-      <CardCompoment anidata={aniData}></CardCompoment>
+      <CardListCompoment anidata={aniData}></CardListCompoment>
     </div>
   );
 }
