@@ -27,17 +27,20 @@ const converToShow = (i:number) =>{
 }
 
 
+
 const CardListCompoment: React.FC<{ anidata: AniWeekData[] }> = ({ anidata }) => {
 
+  const handleClose = ()=>{
+    setIsModelOpen(false);
+    setCurrentAni(null); // 清除当前选中的动画数据
+  }
+
+
+
   const [currentAni, setCurrentAni] = useState<AniData|null>(null);
-
-
-
-
+  const [isModelOpen, setIsModelOpen] = useState(false);
   return (<div className="bg-white">
-
-    {currentAni!=null && <BangumiDetail anidata={currentAni} />}
-
+    {currentAni!=null && <BangumiDetail anidata={currentAni} isModelOpen={isModelOpen} handleModelClose={() =>handleClose()}  />}
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
       {anidata.map((item, index) => (
         <div key={item.day}>
@@ -52,7 +55,8 @@ const CardListCompoment: React.FC<{ anidata: AniWeekData[] }> = ({ anidata }) =>
               <div key={ani.id} onClick={()=>{
                 console.log("被点击了",ani);
                 
-                setCurrentAni(ani)
+                setCurrentAni(ani);
+                setIsModelOpen(true);
               }}>
                 <div className="h-56 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-72 xl:h-80">
                   <img
