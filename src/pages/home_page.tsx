@@ -17,12 +17,11 @@ export interface AniData {
 
 export default function HomePage() {
   const [aniData, setAniData] = useState<AniWeekData[]>([]);
-
   useEffect(() => {
     const getAniData = async () => {
       try {
         const response = await API.get(getAniDataEndpoint(2024, "春"));
-        console.log("ddd", response);
+        console.log("HomePage ", response);
         if (response.data.code === 200) {
           // 遍历response.data,转换成anidata
           const anidata: AniWeekData[] = response.data.data.map(
@@ -37,12 +36,7 @@ export default function HomePage() {
               };
             }
           );
-
           anidata.sort((a, b) => a.day - b.day);
-      
-          
-       
-
           setAniData(anidata);
         } else {
           console.log("有问题");
@@ -61,8 +55,7 @@ export default function HomePage() {
       <div className="max-w-[30vw] mx-auto ">
         <SearchBar></SearchBar>
       </div>
-
-      <CardListCompoment anidata={aniData}></CardListCompoment>
+      {aniData.length>0 ? <CardListCompoment anidata={aniData}></CardListCompoment> : 'loading'}
     </div>
   );
 }
